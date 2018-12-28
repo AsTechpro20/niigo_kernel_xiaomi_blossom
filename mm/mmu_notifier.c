@@ -176,9 +176,15 @@ void __mmu_notifier_change_pte(struct mm_struct *mm, unsigned long address,
 
 int __mmu_notifier_invalidate_range_start(struct mmu_notifier_range *range)
 {
+	struct mmu_notifier_range _range, *range = &_range;
 	struct mmu_notifier *mn;
 	int ret = 0;
 	int id;
+
+	range->blockable = blockable;
+	range->start = start;
+	range->end = end;
+	range->mm = mm;
 
 	id = srcu_read_lock(&srcu);
 	hlist_for_each_entry_rcu(mn, &range->mm->mmu_notifier_mm->list, hlist) {
@@ -201,8 +207,19 @@ EXPORT_SYMBOL_GPL(__mmu_notifier_invalidate_range_start);
 void __mmu_notifier_invalidate_range_end(struct mmu_notifier_range *range,
 					 bool only_end)
 {
+	struct mmu_notifier_range _range, *range = &_range;
 	struct mmu_notifier *mn;
 	int id;
+
+	/*
+	 * The end call back will never be call if the start refused to go
+	 * through because of blockable was false so here assume that we
+	 * can block.
+	 */
+	range->blockable = true;
+	range->start = start;
+	range->end = end;
+	range->mm = mm;
 
 	id = srcu_read_lock(&srcu);
 	hlist_for_each_entry_rcu(mn, &range->mm->mmu_notifier_mm->list, hlist) {
