@@ -2517,7 +2517,9 @@ firmware_class.path=/vendor/firmware";
 		clock-names = "usb0",
 			"usb0_clk_top_sel",
 			"usb0_clk_univpll3_d4";
-		charger = <&mt6370_chg>;
+		charger = <&mtk_charger_type>;
+		nvmem-cell-names = "efuse_idx107";
+		nvmem-cells = <&efuse_analog7>;
 		pericfg= <&pericfg>;
 	};
 
@@ -2693,7 +2695,7 @@ firmware_class.path=/vendor/firmware";
 		efuse_ly: ly@210 {
 			reg = <0x210 0x4>;
 		};
-		u2_phy_data: u2_phy_data@1ac {
+		efuse_analog7: efuse_analog7@1ac {
 			reg = <0x1ac 0x4>;
 		};
 	};
