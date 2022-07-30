@@ -203,5 +203,6 @@ config TOUCHSCREEN_GOODIX_BRL
 source "drivers/input/touchscreen/mediatek/goodix_berlin_driver/Kconfig"
 
 source "drivers/input/touchscreen/mediatek/nt36xxx_spi/Kconfig"
+source "drivers/input/touchscreen/mediatek/ft8006s_spi/Kconfig"
 
 endif
