@@ -177,6 +177,19 @@ config TOUCHSCREEN_GOODIX_BRL
 	  If unsure, say N.
 source "drivers/input/touchscreen/mediatek/goodix_berlin_driver/Kconfig"
 
+config TOUCHSCREEN_HIMAX_CHIPSET
+	bool "HIMAX for Mediatek package"
+	default n
+	help
+	  Say Y here if you have HIMAX touch panel.
+
+	  If unsure, say N.
+
+	  To compile this dirver as a module, choose M here: the
+	  module will be called.
+
+source "drivers/input/touchscreen/mediatek/hxchipset/Kconfig"
+
 source "drivers/input/touchscreen/mediatek/nt36xxx_spi/Kconfig"
 source "drivers/input/touchscreen/mediatek/ft8006s_spi/Kconfig"
 
