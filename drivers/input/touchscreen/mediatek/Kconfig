@@ -192,5 +192,6 @@ source "drivers/input/touchscreen/mediatek/hxchipset/Kconfig"
 
 source "drivers/input/touchscreen/mediatek/nt36xxx_spi/Kconfig"
 source "drivers/input/touchscreen/mediatek/ft8006s_spi/Kconfig"
+source "drivers/input/touchscreen/mediatek/chipone/Kconfig"
 
 endif
