@@ -103,7 +103,6 @@ enum IMGSENSOR_RETURN imgsensor_oc_interrupt(
 		mdelay(5);
 		for (i = 0; i < REGULATOR_TYPE_MAX_NUM; i++) {
 			if (preg_own->pregulator[sensor_idx][i] &&
-					regulator_is_enabled(preg_own->pregulator[sensor_idx][i]) &&
 					!Is_Notify_call[sensor_idx][i]
 				) {
 				/* oc notifier callback function */
@@ -139,7 +138,6 @@ enum IMGSENSOR_RETURN imgsensor_oc_interrupt(
 
 		for (i = 0; i < REGULATOR_TYPE_MAX_NUM; i++) {
 			if (preg_own->pregulator[sensor_idx][i] &&
-				regulator_is_enabled(preg_own->pregulator[sensor_idx][i]) &&
 				Is_Notify_call[sensor_idx][i]
 				) {
 				/* oc notifier callback function */
