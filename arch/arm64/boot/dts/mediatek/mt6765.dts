@@ -2717,6 +2717,9 @@ firmware_class.path=/vendor/firmware";
 		u2_phy_data: u2_phy_data@1ac {
 			reg = <0x1ac 0x4>;
 		};
+		efuse_analog7: efuse_analog7@1ac {
+			reg = <0x1ac 0x4>;
+		};
 	};
 
 	mipi_tx0@11c80000 {
