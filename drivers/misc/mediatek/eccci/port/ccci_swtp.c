@@ -226,8 +226,9 @@ static void swtp_init_delayed_work(struct work_struct *work)
 	/*input system config*/
 	swtp_ipdev = input_allocate_device();
 	if (!swtp_ipdev) {
+		ret = -1;
 		pr_err("swtp_init: input_allocate_device fail\n");
-		return -1;
+		goto SWTP_INIT_END;
 	}
 	swtp_ipdev->name = "swtp-input";
 	input_set_capability(swtp_ipdev, EV_KEY, KEY_ANT_CONNECT);
@@ -237,8 +238,9 @@ static void swtp_init_delayed_work(struct work_struct *work)
 	//set_bit(INPUT_PROP_NO_DUMMY_RELEASE, ant_info->ipdev->propbit);
 	ret = input_register_device(swtp_ipdev);
 	if (ret) {
+		ret = -1;
 		pr_err("swtp_init: input_register_device fail rc=%d\n", ret);
-		return -1;
+		goto SWTP_INIT_END;
 	}
 	pr_info("swtp_init: input_register_device success \n");
 
