@@ -3607,7 +3607,6 @@ firmware_class.path=/vendor/firmware";
 		adapter_name = "pd_adapter";
 	};
 
-<<<<<<< HEAD
 	extcon_usb: extcon_usb {
 		compatible = "mediatek,extcon-usb";
 		charger = <&mt6370_chg>;
@@ -3616,7 +3615,8 @@ firmware_class.path=/vendor/firmware";
 		vbus-current = <1800000>;
 		dev-conn = <&usb>;
 		mediatek,bypss-typec-sink = <1>;
-=======
+	};
+
 	bq2560x: bq2560x {
 		compatible = "ti,bq2560x_charger";
 	};
@@ -3631,7 +3631,6 @@ firmware_class.path=/vendor/firmware";
 
 	cx7601: cx7601 {
 		compatible = "cx,cx7601_charger";
->>>>>>> b1e2458ac752 (ARM64: DTS: Import Xiaomi changes from stock)
 	};
 
 	rt9465_slave_chr: rt9465_slave_chr {
