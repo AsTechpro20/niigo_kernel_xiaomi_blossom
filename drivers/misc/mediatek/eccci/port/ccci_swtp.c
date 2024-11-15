@@ -308,6 +308,8 @@ SWTP_INIT_END:
 
 int swtp_init(int md_id)
 {
+	int ret = 0;
+
 	/* parameter check */
 	if (md_id < 0 || md_id >= SWTP_MAX_SUPPORT_MD) {
 		CCCI_LEGACY_ERR_LOG(-1, SYS,
