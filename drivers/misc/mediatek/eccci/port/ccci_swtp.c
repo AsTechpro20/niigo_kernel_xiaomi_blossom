@@ -223,25 +223,6 @@ static void swtp_init_delayed_work(struct work_struct *work)
 	CCCI_NORMAL_LOG(-1, SYS, "%s start\n", __func__);
 	CCCI_BOOTUP_LOG(-1, SYS, "%s start\n", __func__);
 
-	/*input system config*/
-	swtp_ipdev = input_allocate_device();
-	if (!swtp_ipdev) {
-		pr_err("swtp_init: input_allocate_device fail\n");
-		return -1;
-	}
-	swtp_ipdev->name = "swtp-input";
-	input_set_capability(swtp_ipdev, EV_KEY, KEY_ANT_CONNECT);
-	input_set_capability(swtp_ipdev, EV_KEY, KEY_ANT_UNCONNECT);
-	input_set_capability(swtp_ipdev, EV_KEY, DIV_ANT_CONNECT);
-	input_set_capability(swtp_ipdev, EV_KEY, DIV_ANT_UNCONNECT);
-	//set_bit(INPUT_PROP_NO_DUMMY_RELEASE, ant_info->ipdev->propbit);
-	ret = input_register_device(swtp_ipdev);
-	if (ret) {
-		pr_err("swtp_init: input_register_device fail rc=%d\n", ret);
-		return -1;
-	}
-	pr_info("swtp_init: input_register_device success \n");
-
 	md_id = swtp->md_id;
 
 	if (md_id < 0 || md_id >= SWTP_MAX_SUPPORT_MD) {
@@ -335,6 +316,25 @@ int swtp_init(int md_id)
 	}
 	/* init woke setting */
 	swtp_data[md_id].md_id = md_id;
+
+	/*input system config*/
+	swtp_ipdev = input_allocate_device();
+	if (!swtp_ipdev) {
+		pr_err("swtp_init: input_allocate_device fail\n");
+		return -1;
+	}
+	swtp_ipdev->name = "swtp-input";
+	input_set_capability(swtp_ipdev, EV_KEY, KEY_ANT_CONNECT);
+	input_set_capability(swtp_ipdev, EV_KEY, KEY_ANT_UNCONNECT);
+	input_set_capability(swtp_ipdev, EV_KEY, DIV_ANT_CONNECT);
+	input_set_capability(swtp_ipdev, EV_KEY, DIV_ANT_UNCONNECT);
+	//set_bit(INPUT_PROP_NO_DUMMY_RELEASE, ant_info->ipdev->propbit);
+	ret = input_register_device(swtp_ipdev);
+	if (ret) {
+		pr_err("swtp_init: input_register_device fail rc=%d\n", ret);
+		return -1;
+	}
+	pr_info("swtp_init: input_register_device success \n");
 
 	INIT_DELAYED_WORK(&swtp_data[md_id].init_delayed_work,
 		swtp_init_delayed_work);
