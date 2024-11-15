@@ -4183,10 +4183,12 @@ static int mt6370_pmu_chg_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_ONLINE:
 		ret = mt6370_pmu_chg_get_online(chg_data, val);
 		break;
+#ifdef CONFIG_TCPC_CLASS
 #ifndef CONFIG_MACH_MT6771
 	case POWER_SUPPLY_PROP_AUTHENTIC:
 		val->intval = chg_data->ignore_usb;
 		break;
+#endif
 #endif
 	case POWER_SUPPLY_PROP_TYPE:
 		val->intval = chg_data->psy_desc.type;
