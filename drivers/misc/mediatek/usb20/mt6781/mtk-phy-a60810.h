@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 /*
- * Copyright (C) 2017 MediaTek Inc.
+ * Copyright (C) 2016 MediaTek Inc.
  */
+
 
 #ifndef __MTK_PHY_A60810_H
 #define __MTK_PHY_A60810_H

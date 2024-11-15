@@ -1,7 +1,8 @@
-// SPDX-License-Identifier: GPL-2.0
+/* SPDX-License-Identifier: GPL-2.0 */
 /*
- * Copyright (C) 2018 MediaTek Inc.
+ * Copyright (C) 2016 MediaTek Inc.
  */
+
 
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -229,7 +230,7 @@ void musb_h_setup(struct usb_ctrlrequest *setup)
 {
 	unsigned short csr0;
 
-	DBG(0, "%s ++\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	musb_otg_write_fifo(sizeof(struct usb_ctrlrequest), (u8 *) setup);
 	csr0 = musb_readw(mtk_musb->mregs, MUSB_OTG_CSR0);
 	DBG(0, "%s,csr0=0x%x\n", __func__, csr0);
@@ -238,7 +239,7 @@ void musb_h_setup(struct usb_ctrlrequest *setup)
 	/* polling the Tx interrupt */
 	if (musb_polling_ep0_interrupt())
 		return;
-	DBG(0, "%s --\n", __func__);
+	DBG(0, "%s--\n", __func__);
 }
 
 void musb_h_in_data(unsigned char *buf, u16 len)
@@ -248,7 +249,7 @@ void musb_h_in_data(unsigned char *buf, u16 len)
 	u16 received = 0;
 	bool bshort = false;
 
-	DBG(0, "%s ++\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	while ((received < len) && (!bshort)) {
 		csr0 = musb_readw(mtk_musb->mregs, MUSB_OTG_CSR0);
 		csr0 |= MUSB_CSR0_H_REQPKT;
@@ -278,7 +279,7 @@ void musb_h_in_data(unsigned char *buf, u16 len)
 			musb_writew(mtk_musb->mregs, MUSB_OTG_CSR0, csr0);
 		} else
 			DBG(0, "error, not receive the rxpktrdy interrupt!\n");
-		DBG(0, "%s --\n", __func__);
+		DBG(0, "%s--\n", __func__);
 	}
 }
 
@@ -286,7 +287,7 @@ void musb_h_in_status(void)
 {
 	unsigned short csr0;
 
-	DBG(0, "%s ++\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	csr0 = musb_readw(mtk_musb->mregs, MUSB_OTG_CSR0);
 	csr0 |= MUSB_CSR0_H_REQPKT | MUSB_CSR0_H_STATUSPKT;
 	musb_writew(mtk_musb->mregs, MUSB_OTG_CSR0, csr0);
@@ -312,14 +313,14 @@ void musb_h_in_status(void)
 			msleep(1000);
 		}
 	}
-	DBG(0, "%s --\n", __func__);
+	DBG(0, "%s--\n", __func__);
 }
 
 void musb_h_out_status(void)
 {
 	unsigned short csr0;
 
-	DBG(0, "%s --\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	csr0 = musb_readw(mtk_musb->mregs, MUSB_OTG_CSR0);
 	csr0 |= MUSB_CSR0_H_STATUSPKT | MUSB_CSR0_TXPKTRDY;
 	musb_writew(mtk_musb->mregs, MUSB_OTG_CSR0, csr0);
@@ -329,7 +330,7 @@ void musb_h_out_status(void)
 	csr0 = musb_readw(mtk_musb->mregs, MUSB_OTG_CSR0);
 	DBG(0, "csr0 = 0x%x!\n", csr0);
 #endif
-	DBG(0, "%s --\n", __func__);
+	DBG(0, "%s--\n", __func__);
 }
 
 void musb_d_reset(void)
@@ -817,10 +818,11 @@ TD_4_6:
 		return TEST_IS_STOP;
 	/* session is set and VBUS will be out. */
 	musb_otg_set_session(true);
+#if 1
 	power = musb_readb(mtk_musb->mregs, MUSB_POWER);
 	power &= ~MUSB_POWER_SOFTCONN;
 	musb_writeb(mtk_musb->mregs, MUSB_POWER, power);
-
+#endif
 	/* polling the connect interrupt from B-OPT */
 	DBG(0, "polling connect interrupt,begin\n");
 	ret = musb_polling_bus_interrupt(MUSB_INTR_CONNECT);
@@ -1233,14 +1235,14 @@ int musb_otg_exec_cmd(unsigned int cmd)
 			msleep(100);
 		break;
 	}
-	DBG(0, "%s --\n", __func__);
+	DBG(0, "%s--\n", __func__);
 	return 0;
 
 }
 
 void musb_otg_stop_cmd(void)
 {
-	DBG(0, "%s ++\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	atomic_set(&g_exec, 0);
 	is_td_59 = false;
 	complete(&stop_event);
@@ -1266,7 +1268,7 @@ void musb_otg_message_cb(void)
 
 static int musb_otg_test_open(struct inode *inode, struct file *file)
 {
-	DBG(0, "%s ++\n", __func__);
+	DBG(0, "%s++\n", __func__);
 	return 0;
 }
 
@@ -1305,8 +1307,8 @@ ssize_t musb_otg_test_write(struct file *filp,
 			DBG(0, "%s::OTG_INIT_MSG\n", __func__);
 			musb_otg_message_cb();
 		} else {
-			DBG(0, "%s::the
-				value is invalid,0x%x\n", __func__,
+			DBG(0, "musb_otg_test_write::the
+				value is invalid,0x%x\n",
 				value);
 			ret = -EFAULT;
 		}
@@ -1319,7 +1321,7 @@ static long musb_otg_test_ioctl
 {
 	int ret = 0;
 
-	DBG(0, "%s:cmd=0x%x\n", __func__, cmd);
+	DBG(0, "%s :cmd=0x%x\n", __func__, cmd);
 	ret = musb_otg_exec_cmd(cmd);
 	return (long)ret;
 }
