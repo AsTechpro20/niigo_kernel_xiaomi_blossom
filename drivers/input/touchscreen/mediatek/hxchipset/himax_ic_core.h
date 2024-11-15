@@ -21,10 +21,10 @@
 #include <linux/slab.h>
 
 // include longcheer header
- #include "../lct_tp_info.h"
- #include "../lct_tp_selftest.h"
+ #include "../../lct_tp_info.h"
+ #include "../../lct_tp_selftest.h"
 #ifdef LCT_TP_WORK_EN
-#include "../lct_tp_work.h"
+#include "../../lct_tp_work.h"
 #endif
 
 #define DATA_LEN_8				8

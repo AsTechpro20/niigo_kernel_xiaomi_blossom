@@ -41,7 +41,7 @@
 #include <linux/kallsyms.h>
 
 // include longcheer HEAD files
-#include "../lct_tp_info.h"
+#include "../../lct_tp_info.h"
 
 #if defined(CONFIG_OF)
 	#include <linux/of_gpio.h>

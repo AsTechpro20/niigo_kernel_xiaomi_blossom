@@ -42,11 +42,11 @@
 #endif
 
 // include longcheer header
-#include "../lct_tp_info.h"
-#include "../lct_tp_selftest.h"
-#include "../lct_tp_gesture.h"
-#include "../lct_tp_grip_area.h"
-#include "../lct_tp_work.h"
+#include "../../lct_tp_info.h"
+#include "../../lct_tp_selftest.h"
+#include "../../lct_tp_gesture.h"
+#include "../../lct_tp_grip_area.h"
+#include "../../lct_tp_work.h"
 #ifdef CONFIG_TOUCHSCREEN_XIAOMI_TOUCHFEATURE
 #include "../xiaomi/xiaomi_touch.h"
 #endif

@@ -65,14 +65,14 @@
 #include "focaltech_common.h"
 
 // include longcheer header
-#include "../lct_tp_info.h"
-#include "../lct_tp_selftest.h"
-#include "../lct_tp_gesture.h"
+#include "../../lct_tp_info.h"
+#include "../../lct_tp_selftest.h"
+#include "../../lct_tp_gesture.h"
 #if LCT_TP_WORK_EN
-#include "../lct_tp_work.h"
+#include "../../lct_tp_work.h"
 #endif
 #if LCT_TP_GRIP_AREA_EN
-#include "../lct_tp_grip_area.h"
+#include "../../lct_tp_grip_area.h"
 #endif
 #ifdef CONFIG_PM
 #include <linux/pm_runtime.h>
